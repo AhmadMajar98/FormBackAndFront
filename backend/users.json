@@ -1,3 +1,19 @@
 [
-  
+  {
+    "firstName": "Ahmad",
+    "lastName": "Majar",
+    "username": "AhmadMajar98",
+    "email": "ahmad.majar98@gmail.com",
+    "password": "$2b$10$rgrsYPUx8dw8ryxFK7sfH.elBGpRgZrJpSilrBZcQO5EybHew/yiC",
+    "gender": "Male",
+    "hobbies": [
+      "Traveling",
+      "Cooking"
+    ],
+    "brief": "lsmldfmlsdf",
+    "dateOfBirth": "2010-11-11",
+    "favoriteColor": "",
+    "image": "uploads/1729480918612-WhatsApp Image 2024-10-14 at 5.55.38 PM.jpeg",
+    "cv": "uploads/1729480919257-Baccalaureate transcript - Ahmad Majar.pdf"
+  }
 ]

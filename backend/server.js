@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors());
@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads');
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, `${Date.now()}-${file.originalname}`); // Ensure unique filenames
     },
 });
 const upload = multer({ storage: storage });
@@ -79,8 +79,8 @@ app.post('/api/register', upload.fields([{ name: 'image' }, { name: 'cv' }]), (r
         brief,
         dateOfBirth,
         favoriteColor,
-        image: req.files['image'][0].path,
-        cv: req.files['cv'][0].path,
+        image: req.files['image'][0]?.path, // Optional chaining
+        cv: req.files['cv'][0]?.path, // Optional chaining
     };
 
     users.push(newUser);

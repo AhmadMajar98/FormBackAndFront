@@ -2,18 +2,20 @@
   {
     "firstName": "Ahmad",
     "lastName": "Majar",
-    "username": "AhmadMajar98",
+    "username": "Ahmad9sdfsdf8",
     "email": "ahmad.majar98@gmail.com",
-    "password": "$2b$10$rgrsYPUx8dw8ryxFK7sfH.elBGpRgZrJpSilrBZcQO5EybHew/yiC",
+    "password": "$2b$10$0gNb1PICBC7q33M2fPa.a.v.tKiuOR81CyPsWRLXBp3SnwHj1gs3i",
+    "phone": "0956657165",
+    "address": "asdfasdfasdfasdf",
+    "city": "New York ",
+    "state": "NY",
+    "zipCode": "98777",
     "gender": "Male",
-    "hobbies": [
-      "Traveling",
-      "Cooking"
-    ],
-    "brief": "lsmldfmlsdf",
-    "dateOfBirth": "2010-11-11",
+    "hobbies": [],
+    "brief": "dfsdjfkjsdljfkjasj;fdalskdf;sadf",
+    "dateOfBirth": "",
     "favoriteColor": "",
-    "image": "uploads/1729480918612-WhatsApp Image 2024-10-14 at 5.55.38 PM.jpeg",
-    "cv": "uploads/1729480919257-Baccalaureate transcript - Ahmad Majar.pdf"
+    "image": "uploads/1729781481684-one-piece-5k-5120x2880-10913.jpg",
+    "cv": "uploads/1729781482113-Green And White Illustrative Medical Healthcare Presentation.pdf"
   }
 ]

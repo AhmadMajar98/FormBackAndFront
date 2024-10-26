@@ -53,12 +53,7 @@ const authenticateJWT = (req, res, next) => {
         res.status(401).send('Error: Unauthorized');
     }
 };
-let tokenBlacklist = [];
 
-app.post('/api/logout', authenticateJWT, (req, res) => {
-    tokenBlacklist.push(req.headers['authorization']);
-    res.sendStatus(204); 
-});
 app.post('/api/register', upload.fields([{ name: 'image' }, { name: 'cv' }]), (req, res) => {
     const { firstName, lastName, username, email, password ,phone, address, city, state, zipCode, gender, hobbies, brief, dateOfBirth, favoriteColor } = req.body;
 
@@ -154,6 +149,12 @@ app.post('/api/counter/decrement', (req, res) => {
     res.json({ count: newCount });
 });
 
+let tokenBlacklist = [];
+
+app.post('/api/logout', authenticateJWT, (req, res) => {
+    tokenBlacklist.push(req.headers['authorization']);
+    res.sendStatus(204); 
+});
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -37,9 +37,11 @@ const saveUsersData = (data) => {
     fs.writeFileSync('users.json', JSON.stringify(data, null, 2));
 };
 
+
+
 const authenticateJWT = (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1];
-    if (token) {
+    if (token && !tokenBlacklist.includes(req.headers['authorization'])) {
         jwt.verify(token, 'secretkey', (err, user) => {
             if (err) {
                 return res.status(403).send("Error: forbidden");
@@ -48,10 +50,15 @@ const authenticateJWT = (req, res, next) => {
             next();
         });
     } else {
-        res.status(401).send('Error');
+        res.status(401).send('Error: Unauthorized');
     }
 };
+let tokenBlacklist = [];
 
+app.post('/api/logout', authenticateJWT, (req, res) => {
+    tokenBlacklist.push(req.headers['authorization']);
+    res.sendStatus(204); 
+});
 app.post('/api/register', upload.fields([{ name: 'image' }, { name: 'cv' }]), (req, res) => {
     const { firstName, lastName, username, email, password ,phone, address, city, state, zipCode, gender, hobbies, brief, dateOfBirth, favoriteColor } = req.body;
 

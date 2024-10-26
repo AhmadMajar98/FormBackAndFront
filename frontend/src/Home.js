@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [count, setCount] = useState(0);
-    const [isLoading, setIsLoading] = useState(true); 
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     const token = localStorage.getItem('token');
     const firstName = localStorage.getItem('firstName') || 'Guest';
 
     useEffect(() => {
-        if (!token) {
-            navigate('/login');
-            return;
-        }
+        const checkAuthentication = async () => {
+            if (!token) {
+                navigate('/login');
+                return;
+            }
 
-        const fetchCounter = async () => {
             try {
                 const response = await fetch('http://localhost:5001/api/home', {
                     headers: {
@@ -23,13 +23,14 @@ const Home = () => {
                     },
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setCount(data.count || 0);
-                } else {
+                if (!response.ok) {
                     console.error('Failed to fetch home data:', response.status);
                     navigate('/login');
+                    return;
                 }
+
+                const data = await response.json();
+                setCount(data.count || 0);
             } catch (error) {
                 console.error('Error fetching home data:', error);
                 navigate('/login');
@@ -38,8 +39,25 @@ const Home = () => {
             }
         };
 
-        fetchCounter();
+        checkAuthentication();
     }, [navigate, token]);
+
+    const handleSignOut = async () => {
+        try {
+            await fetch('http://localhost:5001/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            localStorage.removeItem('token');
+            localStorage.removeItem('firstName');
+            navigate('/login');
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    };
+
 
     const handleIncrement = async () => {
         try {
@@ -92,7 +110,7 @@ const Home = () => {
             <div className="bg-gray-800 rounded-lg shadow-lg p-8 max-w-lg text-center">
                 <h2 className="text-4xl font-bold text-white mb-4">Welcome, {firstName}!</h2>
                 <p className="text-2xl text-indigo-400 mb-6">Counter: <span className="font-semibold text-white">{count}</span></p>
-                
+
                 <div className="flex justify-center space-x-4 mb-6">
                     <button
                         onClick={handleIncrement}
@@ -107,12 +125,19 @@ const Home = () => {
                         Decrement
                     </button>
                 </div>
-                
+
                 <button
                     onClick={handleProfileRedirect}
-                    className="text-indigo-300 hover:text-indigo-400 underline transition duration-300 text-lg"
+                    className="bg-gray-700 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300 hover:scale-105"
                 >
                     Go to Profile
+                </button>
+
+                <button
+                    onClick={handleSignOut}
+                    className="mt-4 text-red-500 hover:text-red-400 underline transition duration-300 text-lg"
+                >
+                    Sign Out
                 </button>
             </div>
         </div>

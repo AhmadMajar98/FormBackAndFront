@@ -120,13 +120,13 @@ app.get('/api/home', authenticateJWT, (req, res) => {
 
 const counterFilePath = path.join(__dirname, 'counter.json');
 
-function getCounter() {
+const getCounter = () => {
     const data = fs.readFileSync(counterFilePath);
     const counter = JSON.parse(data);
     return counter.count;
 }
 
-function updateCounter(newValue) {
+const updateCounter = (newValue) => {
     const counter = { count: newValue };
     fs.writeFileSync(counterFilePath, JSON.stringify(counter));
     return counter.count;

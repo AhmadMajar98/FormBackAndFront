@@ -106,11 +106,20 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-gray-900 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-gray-900 flex items-center justify-center relative">
+            <div className="absolute top-4 right-4">
+                <button
+                    onClick={handleSignOut}
+                    className="text-red-500 hover:text-red-400 underline transition duration-300 text-lg"
+                >
+                    Sign Out
+                </button>
+            </div>
+            
             <div className="bg-gray-800 rounded-lg shadow-lg p-8 max-w-lg text-center">
                 <h2 className="text-4xl font-bold text-white mb-4">Welcome, {firstName}!</h2>
                 <p className="text-2xl text-indigo-400 mb-6">Counter: <span className="font-semibold text-white">{count}</span></p>
-
+                
                 <div className="flex justify-center space-x-4 mb-6">
                     <button
                         onClick={handleIncrement}
@@ -125,23 +134,17 @@ const Home = () => {
                         Decrement
                     </button>
                 </div>
-
+                
                 <button
                     onClick={handleProfileRedirect}
-                    className="bg-gray-700 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-600 transition-all duration-300 hover:scale-105"
+                    className="text-indigo-300 hover:text-indigo-400 underline transition duration-300 text-lg"
                 >
                     Go to Profile
-                </button>
-
-                <button
-                    onClick={handleSignOut}
-                    className="mt-4 text-red-500 hover:text-red-400 underline transition duration-300 text-lg"
-                >
-                    Sign Out
                 </button>
             </div>
         </div>
     );
+    
 };
 
 export default Home;

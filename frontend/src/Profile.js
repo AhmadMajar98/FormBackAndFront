@@ -35,6 +35,23 @@ const Profile = () => {
     if (!user) {
         return <div>Loading...</div>;
     }
+    const handleSignOut = async () => {
+        const token = localStorage.getItem('token');
+        try {
+            await fetch('http://localhost:5001/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            localStorage.removeItem('token');
+            localStorage.removeItem('firstName');
+            navigate('/login');
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    };
+
 
     const userInfo = [
         { label: 'First Name', value: user.firstName || 'N/A' },
@@ -52,9 +69,17 @@ const Profile = () => {
         { label: 'Date of Birth', value: user.dateOfBirth || 'N/A' },
         { label: 'Favorite Color', value: user.favoriteColor || 'N/A' },
     ];
-
+    
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-800 via-blue-900 to-gray-900 flex items-center justify-center p-6">
+              <div className="absolute top-4 right-4">
+            <button
+                onClick={handleSignOut}
+                className="text-red-500 hover:text-red-400 underline transition duration-300 text-lg"
+            >
+                Sign Out
+            </button>
+        </div>
             <div className="bg-gray-900 rounded-2xl shadow-2xl p-10 max-w-3xl w-full text-white">
                 <h2 className="text-4xl font-extrabold text-blue-400 mb-8 text-center">Profile Details</h2>
 

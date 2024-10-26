@@ -17,5 +17,24 @@
     "favoriteColor": "",
     "image": "uploads/1729781481684-one-piece-5k-5120x2880-10913.jpg",
     "cv": "uploads/1729781482113-Green And White Illustrative Medical Healthcare Presentation.pdf"
+  },
+  {
+    "firstName": "maher",
+    "lastName": "amer",
+    "username": "asdasd",
+    "email": "marahfa333@gmail.com",
+    "password": "$2b$10$rakJC30TzD4NcWYERm3jnOHCx9Cbk1A2XCh8BLBzywCIOR0vimUTS",
+    "phone": "2133123",
+    "address": "asdfasdfasdfasdf",
+    "city": "New York ",
+    "state": "NY",
+    "zipCode": "98777",
+    "gender": "Male",
+    "hobbies": [],
+    "brief": "asdasd",
+    "dateOfBirth": "",
+    "favoriteColor": "",
+    "image": "uploads/1729939272065-Screenshot_2024-10-21_152613-removebg-preview.png",
+    "cv": "uploads/1729939272081-Green And White Illustrative Medical Healthcare Presentation.pdf"
   }
 ]

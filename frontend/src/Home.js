@@ -3,29 +3,58 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [count, setCount] = useState(0);
+    const [isLoading, setIsLoading] = useState(true); 
     const navigate = useNavigate();
+
+    const token = localStorage.getItem('token');
     const firstName = localStorage.getItem('firstName') || 'Guest';
 
     useEffect(() => {
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
         const fetchCounter = async () => {
             try {
-                const response = await fetch('http://localhost:5001/api/counter');
-                const data = await response.json();
-                setCount(data.count);
+                const response = await fetch('http://localhost:5001/api/home', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setCount(data.count || 0);
+                } else {
+                    console.error('Failed to fetch home data:', response.status);
+                    navigate('/login');
+                }
             } catch (error) {
-                console.error('Error fetching counter:', error);
+                console.error('Error fetching home data:', error);
+                navigate('/login');
+            } finally {
+                setIsLoading(false);
             }
         };
+
         fetchCounter();
-    }, []);
+    }, [navigate, token]);
 
     const handleIncrement = async () => {
         try {
             const response = await fetch('http://localhost:5001/api/counter/increment', {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
             });
-            const data = await response.json();
-            setCount(data.count);
+            if (response.ok) {
+                const data = await response.json();
+                setCount(data.count);
+            } else {
+                console.error('Failed to increment counter:', response.status);
+            }
         } catch (error) {
             console.error('Error incrementing counter:', error);
         }
@@ -35,9 +64,16 @@ const Home = () => {
         try {
             const response = await fetch('http://localhost:5001/api/counter/decrement', {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
             });
-            const data = await response.json();
-            setCount(data.count);
+            if (response.ok) {
+                const data = await response.json();
+                setCount(data.count);
+            } else {
+                console.error('Failed to decrement counter:', response.status);
+            }
         } catch (error) {
             console.error('Error decrementing counter:', error);
         }
@@ -46,6 +82,10 @@ const Home = () => {
     const handleProfileRedirect = () => {
         navigate('/profile');
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-gray-900 flex items-center justify-center">

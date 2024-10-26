@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -55,7 +54,7 @@ const authenticateJWT = (req, res, next) => {
 };
 
 app.post('/api/register', upload.fields([{ name: 'image' }, { name: 'cv' }]), (req, res) => {
-    const { firstName, lastName, username, email, password ,phone, address, city, state, zipCode, gender, hobbies, brief, dateOfBirth, favoriteColor } = req.body;
+    const { firstName, lastName, username, email, password ,phone, address, city, state, zipCode, gender, brief, dateOfBirth, favoriteColor } = req.body;
 
     if (!firstName || !lastName || !username || !email || !password ) {
         return res.status(400).json({ message: 'All fields are required' });
@@ -76,7 +75,6 @@ app.post('/api/register', upload.fields([{ name: 'image' }, { name: 'cv' }]), (r
         state, 
         zipCode,
         gender,
-        hobbies: hobbies ? hobbies.split(',') : [],
         brief,
         dateOfBirth,
         favoriteColor,
@@ -155,6 +153,8 @@ app.post('/api/logout', authenticateJWT, (req, res) => {
     tokenBlacklist.push(req.headers['authorization']);
     res.sendStatus(204); 
 });
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

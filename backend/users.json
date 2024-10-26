@@ -4,18 +4,17 @@
     "lastName": "Majar",
     "username": "Ahmad98",
     "email": "ahmad.majar98@gmail.com",
-    "password": "$2b$10$MJubWz7bvxaBvZ5ZqStW.uxTeAHYF3HPqbM5q0NFOyuiMb/CP7Lpq",
+    "password": "$2b$10$WHa0fvkmhaHz8aVirdMy9O0540jWoq3YIyo4wcvuJblV0bYhT8cya",
     "phone": "0956657165",
-    "address": "asdfasdfasdfasdf",
+    "address": "Dweilaa",
     "city": "New York ",
     "state": "NY",
     "zipCode": "98777",
     "gender": "Male",
-    "hobbies": [],
-    "brief": "asdasdas",
-    "dateOfBirth": "",
+    "brief": "The GOAT of Web Development",
+    "dateOfBirth": "1998-07-28",
     "favoriteColor": "",
-    "image": "uploads/1729942401180-anime-naruto-wearing-hokage-cloak-2iyta2pvbkr8elof.jpg",
-    "cv": "uploads/1729942401196-Green And White Illustrative Medical Healthcare Presentation.pdf"
+    "image": "uploads/1729949950995-152514.jpg",
+    "cv": "uploads/1729949950998-Green And White Illustrative Medical Healthcare Presentation.pdf"
   }
 ]
